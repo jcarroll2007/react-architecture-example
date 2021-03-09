@@ -39,7 +39,7 @@ export const CharacterList: React.FunctionComponent<CharacterListProps> = ({
           </IsJediWrapper>
         </ListItem>
         {characters.map((c) => (
-          <ListItem>
+          <ListItem key={c.name}>
             <NameWrapper>
               {c.name}
             </NameWrapper>
