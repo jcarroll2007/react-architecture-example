@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { ActionList } from '../ActionList';
 import { CharacterList } from '../CharacterList';
 import { Page } from '../Page'
 import { actions } from '../../redux/actions';
@@ -10,6 +9,7 @@ import { Route, useHistory } from 'react-router-dom';
 import { Modal } from '../Modal';
 import { Form, FormField } from '../CharacterCreateForm/styles';
 import { Input } from '../Input';
+import { CharacterListWrapper, ListWrapper, ActionsWrapper, LinkAction } from './styles';
 
 interface Values {
   name: string,
@@ -42,14 +42,19 @@ export const MonolithicCharacterList: React.FunctionComponent = () => {
 
   return (
     <Page>
-      <ActionList actions={[{ to: CHARACTERS_CREATE, label: 'Create a New Character' }]}>
-        {characters ?
-          <CharacterList
-            characters={characters}
-          /> :
-          null
-        }
-      </ActionList>
+      <CharacterListWrapper>
+        <ListWrapper>
+          {characters ?
+            <CharacterList
+              characters={characters}
+            /> :
+            null
+          }
+        </ListWrapper>
+        <ActionsWrapper>
+          <LinkAction to={CHARACTERS_CREATE}>Create a New Character</LinkAction>
+        </ActionsWrapper>
+      </CharacterListWrapper>
       <Route
         exact
         path={CHARACTERS_CREATE}
@@ -58,7 +63,7 @@ export const MonolithicCharacterList: React.FunctionComponent = () => {
             <FormField>
               <label htmlFor="starWarsCharacters-form-name">
                 Name
-            </label>
+              </label>
               <Input
                 name="starWarsCharacters-form-name"
                 id="starWarsCharacters-form-name"
