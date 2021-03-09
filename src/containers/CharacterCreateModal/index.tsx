@@ -1,7 +1,8 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CharacterCreateForm } from '../../components/CharacterCreateForm';
 import { Modal } from '../../components/Modal';
+import { actions } from '../../redux/actions';
 
 interface CharacterCreateModalProps {
   onCreateSuccess: () => void
@@ -10,14 +11,13 @@ interface CharacterCreateModalProps {
 export const CharacterCreateModalContainer: React.FunctionComponent<CharacterCreateModalProps> = ({
   onCreateSuccess
 }) => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   return (
     <Modal isOpen={true}>
       <CharacterCreateForm
         onSubmit={function handleSubmit(values) {
-          // TODO: implement create character action
-          // await dispatch(actions.createCharacter(values));
+          dispatch(actions.createCharacter(values));
           onCreateSuccess()
         }} />
     </Modal>

@@ -2,6 +2,7 @@ import { Character } from "../api/types"
 
 export const CHARACTER_LIST_FETCH = 'CHARACTER_LIST_FETCH'
 export const CHARACTER_LIST_SUCCESS = 'CHARACTER_LIST_SUCCESS'
+export const CHARACTERS_CREATE = 'CHARACTER_CREATE'
 
 interface CharacterListFetchAction {
   type: typeof CHARACTER_LIST_FETCH
@@ -35,11 +36,23 @@ export function fetchCharactersSuccess(): CharacterListSuccessAction {
   }
 }
 
+interface CharacterCreateAction {
+  type: typeof CHARACTERS_CREATE
+  payload: Character
+}
+export function createCharacter(payload: Character): CharacterCreateAction {
+  return {
+    type: CHARACTERS_CREATE,
+    payload
+  }
+}
+
 export type CharacterListActionTypes = CharacterListFetchAction | CharacterListSuccessAction
 
-export type ActionTypes = CharacterListActionTypes
+export type ActionTypes = CharacterListActionTypes | CharacterCreateAction
 
 export const actions = {
+  createCharacter,
   fetchCharacters,
   fetchCharactersSuccess
 }

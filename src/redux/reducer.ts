@@ -1,5 +1,5 @@
 import { Character } from "../api/types";
-import { ActionTypes } from "./actions";
+import { ActionTypes, CHARACTERS_CREATE } from "./actions";
 
 export interface State {
   characters: {
@@ -31,6 +31,19 @@ const initialState: State = {
 
 export const reducer = function (state: State = initialState, action: ActionTypes) {
   switch (action.type) {
+    case CHARACTERS_CREATE: {
+      const currentCharacters = state?.characters?.data || []
+      return {
+        ...state,
+        characters: {
+          ...state.characters,
+          data: [
+            ...currentCharacters,
+            action.payload
+          ]
+        }
+      }
+    }
     default:
       return state;
   }
