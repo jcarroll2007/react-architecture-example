@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Wrapper, ListWrapper, ActionsWrapper } from './styles'
+import { Wrapper, ListWrapper, ActionsWrapper, LinkAction } from './styles'
 
-interface ButtonAction {
+interface ButtonActionType {
   onClick: () => void,
   label: string
 }
 
-interface LinkAction {
+interface LinkActionType {
   to: string,
   label: string
 }
 
 interface ActionListProps {
-  actions: Array<ButtonAction | LinkAction>
+  actions: Array<ButtonActionType | LinkActionType>
 }
 
 export const ActionList: React.FunctionComponent<ActionListProps> = ({
@@ -28,10 +28,10 @@ export const ActionList: React.FunctionComponent<ActionListProps> = ({
       {actions.map(action => {
 
         // TODO: this could be cleaned up by using a typeguard function
-        const maybeLink = action as LinkAction
-        if (maybeLink.to) return <Link key={maybeLink.label} to={maybeLink.to}>{maybeLink.label}</Link>
+        const maybeLink = action as LinkActionType
+        if (maybeLink.to) return <LinkAction key={maybeLink.label} to={maybeLink.to}>{maybeLink.label}</LinkAction>
 
-        const maybeButton = action as ButtonAction
+        const maybeButton = action as ButtonActionType
         if (maybeButton.onClick) {
           return <button key={maybeButton.label} onClick={maybeButton.onClick}>{maybeButton.label}</button>
         }

@@ -13,7 +13,19 @@ const initialState: State = {
   characters: {
     loading: false,
     error: null,
-    data: null
+    data: [{
+      name: 'Obi Wan Kenobi',
+      age: 55,
+      isJedi: true
+    }, {
+      name: 'Yoda',
+      age: 900,
+      isJedi: true
+    }, {
+      name: 'Padme',
+      age: 24,
+      isJedi: false
+    }]
   }
 }
 

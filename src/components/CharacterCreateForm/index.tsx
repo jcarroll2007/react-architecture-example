@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Input } from '../Input';
+import { Form, FormField } from './styles'
 
 interface Values {
   name: string,
@@ -24,36 +26,57 @@ export const CharacterCreateForm: React.FunctionComponent<CharacterCreateFormPro
   });
 
   return (
-    <form onSubmit={() => onSubmit(values)}>
-      <input
-        value={values.name}
-        onChange={(e) =>
-          setValues((v) => ({
-            ...v,
-            name: e.target.value
-          }))
-        }
-      />
-      <input
-        value={values.age}
-        onChange={(e) =>
-          setValues((v) => ({
-            ...v,
-            age: Number(e.target.value)
-          }))
-        }
-      />
-      <input
-        checked={values.isJedi}
-        type="checkbox"
-        onChange={(e) =>
-          setValues((v) => ({
-            ...v,
-            isJedi: !values.isJedi
-          }))
-        }
-      />
+    <Form onSubmit={() => onSubmit(values)}>
+      <FormField>
+        <label htmlFor="starWarsCharacters-form-name">
+          Name
+        </label>
+        <Input
+          name="starWarsCharacters-form-name"
+          id="starWarsCharacters-form-name"
+          value={values.name}
+          onChange={(e) =>
+            setValues((v) => ({
+              ...v,
+              name: e.target.value
+            }))
+          }
+        />
+      </FormField>
+      <FormField>
+        <label htmlFor="starWarsCharacters-form-age">
+          Age
+        </label>
+        <Input
+          name="starWarsCharacters-form-age"
+          id="starWarsCharacters-form-age"
+          value={values.age}
+          onChange={(e) =>
+            setValues((v) => ({
+              ...v,
+              age: Number(e.target.value)
+            }))
+          }
+        />
+      </FormField>
+      <FormField>
+        <label htmlFor="starWarsCharacters-form-isJedi">
+          isJedi
+        </label>
+        <Input
+          name="starWarsCharacters-form-isJedi"
+          id="starWarsCharacters-form-isJedi"
+          checked={values.isJedi}
+          type="checkbox"
+          onChange={(e) =>
+            setValues((v) => ({
+              ...v,
+              isJedi: !values.isJedi
+            }))
+          }
+        />
+      </FormField>
       <button type="submit">Create</button>
-    </form>
+    </Form>
   );
 };

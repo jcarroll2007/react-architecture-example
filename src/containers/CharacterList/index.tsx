@@ -28,9 +28,12 @@ export const CharacterListContainer: React.FunctionComponent<CharacterListContai
 
   return (
     <ActionList actions={[{ to: createCharacterPath, label: 'Create a New Character' }]}>
-      <CharacterList
-        characters={[]}
-      />
+      {characters ?
+        <CharacterList
+          characters={characters}
+        /> :
+        null
+      }
     </ActionList>
   );
 };

@@ -19,7 +19,19 @@ interface CharacterListSuccessAction {
 export function fetchCharactersSuccess(): CharacterListSuccessAction {
   return {
     type: CHARACTER_LIST_SUCCESS,
-    payload: [] // TODO: add actual characters here
+    payload: [{
+      name: 'Obi Wan Kenobi',
+      age: 55,
+      isJedi: true
+    }, {
+      name: 'Yoda',
+      age: 900,
+      isJedi: true
+    }, {
+      name: 'Padme',
+      age: 24,
+      isJedi: false
+    }] // TODO: add actual characters here
   }
 }
 
