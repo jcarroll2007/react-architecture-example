@@ -15,6 +15,11 @@ interface CharacterCreateFormProps {
 export const CharacterCreateForm: React.FunctionComponent<CharacterCreateFormProps> = ({
   onSubmit
 }) => {
+  const [errors, setErrors] = useState<{
+    name: string | null
+  }>({
+    name: null
+  })
   const [values, setValues] = useState<{
     name: string,
     age: number,
@@ -26,12 +31,22 @@ export const CharacterCreateForm: React.FunctionComponent<CharacterCreateFormPro
   });
 
   return (
-    <Form onSubmit={() => onSubmit(values)}>
+    <Form onSubmit={(e) => {
+      e.preventDefault()
+      if (!values.name) {
+        setErrors({
+          name: 'Name is required.'
+        })
+      } else {
+        onSubmit(values)
+      }
+    }}>
       <FormField>
         <label htmlFor="starWarsCharacters-form-name">
           Name
         </label>
         <Input
+          data-testid="name-input"
           name="starWarsCharacters-form-name"
           id="starWarsCharacters-form-name"
           value={values.name}
@@ -42,6 +57,7 @@ export const CharacterCreateForm: React.FunctionComponent<CharacterCreateFormPro
             }))
           }
         />
+        {errors.name && <p data-testid="name-error-message">{errors.name}</p>}
       </FormField>
       <FormField>
         <label htmlFor="starWarsCharacters-form-age">
@@ -76,7 +92,7 @@ export const CharacterCreateForm: React.FunctionComponent<CharacterCreateFormPro
           }
         />
       </FormField>
-      <button type="submit">Create</button>
+      <button type="submit" data-testid="form-submit-button">Create</button>
     </Form>
   );
 };
