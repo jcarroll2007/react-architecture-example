@@ -29,6 +29,11 @@ interface Values {
 }
 
 export const MonolithicCharacterList: React.FunctionComponent = () => {
+  const [errors, setErrors] = useState<{
+    name: string | null
+  }>({
+    name: null
+  })
   const [values, setValues] = useState<{
     name: string,
     age: number,
@@ -95,14 +100,21 @@ export const MonolithicCharacterList: React.FunctionComponent = () => {
           }
         </ListWrapper>
         <ActionsWrapper>
-          <LinkAction to={CHARACTERS_CREATE}>Create a New Character</LinkAction>
+          <LinkAction data-testid="create-new-character-button" to={CHARACTERS_CREATE}>Create a New Character</LinkAction>
         </ActionsWrapper>
       </CharacterListWrapper>
       <Route
         exact
         path={CHARACTERS_CREATE}
         render={() => (
-          <Modal isOpen={true}><Form onSubmit={() => handleSubmit(values)}>
+          <Modal isOpen={true}><Form onSubmit={(e) => {
+            e.preventDefault()
+            if (!values.name) {
+              setErrors({
+                name: 'Name is required'
+              })
+            } else handleSubmit(values)
+          }}>
             <FormField>
               <label htmlFor="starWarsCharacters-form-name">
                 Name
@@ -118,6 +130,7 @@ export const MonolithicCharacterList: React.FunctionComponent = () => {
                   }))
                 }
               />
+              {errors.name && <p data-testid="name-error-message">{errors.name}</p>}
             </FormField>
             <FormField>
               <label htmlFor="starWarsCharacters-form-age">
@@ -152,7 +165,7 @@ export const MonolithicCharacterList: React.FunctionComponent = () => {
                 }
               />
             </FormField>
-            <button type="submit">Create</button>
+            <button data-testid="form-submit-button" type="submit">Create</button>
           </Form>
           </Modal>
         )}
