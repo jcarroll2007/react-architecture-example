@@ -1,15 +1,26 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { CharacterList } from '../CharacterList';
 import { Page } from '../Page'
 import { actions } from '../../redux/actions';
 import { CHARACTERS, CHARACTERS_CREATE } from '../../routes'
 import { characterListSelector, characterListLoadingSelector } from '../../redux/selectors';
 import { Route, useHistory } from 'react-router-dom';
 import { Modal } from '../Modal';
-import { Form, FormField } from '../CharacterCreateForm/styles';
 import { Input } from '../Input';
-import { CharacterListWrapper, ListWrapper, ActionsWrapper, LinkAction } from './styles';
+import {
+  CharacterListWrapper,
+  ListWrapper,
+  ActionsWrapper,
+  LinkAction,
+  List,
+  ListItem,
+  NameWrapper,
+  HeaderTypography,
+  ListItemInfo,
+  IsJediWrapper,
+  Form,
+  FormField
+} from './styles';
 
 interface Values {
   name: string,
@@ -44,10 +55,42 @@ export const MonolithicCharacterList: React.FunctionComponent = () => {
     <Page>
       <CharacterListWrapper>
         <ListWrapper>
+          Star Wars Characters
           {characters ?
-            <CharacterList
-              characters={characters}
-            /> :
+            (
+              <List>
+                <ListItem>
+                  <NameWrapper>
+                    <HeaderTypography>
+                      Name
+                    </HeaderTypography>
+                  </NameWrapper>
+                  <ListItemInfo>
+                    <HeaderTypography>
+                      Age
+                    </HeaderTypography>
+                  </ListItemInfo>
+                  <IsJediWrapper>
+                    <HeaderTypography>
+                      isJedi
+                    </HeaderTypography>
+                  </IsJediWrapper>
+                </ListItem>
+                {characters.map((c) => (
+                  <ListItem key={c.name}>
+                    <NameWrapper>
+                      {c.name}
+                    </NameWrapper>
+                    <ListItemInfo>
+                      {c.age}
+                    </ListItemInfo>
+                    <IsJediWrapper>
+                      {c.isJedi ? 'True' : 'False'}
+                    </IsJediWrapper>
+                  </ListItem>
+                ))}
+              </List>
+            ) :
             null
           }
         </ListWrapper>

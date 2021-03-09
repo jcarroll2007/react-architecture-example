@@ -11,8 +11,8 @@ export const CharacterListWrapper = styled.div`
 `
 
 export const ListWrapper = styled.div`
-padding: 32px;
-border-bottom: 1px solid #ececec;
+  padding: 32px;
+  border-bottom: 1px solid #ececec;
 `
 
 export const ActionsWrapper = styled.div`
@@ -28,4 +28,49 @@ export const LinkAction = styled(Link)`
   color: #333;
   text-decoration: none;
   font-weight: 500;
+`
+
+
+export const List = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
+export const ListItem = styled.li`
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #eee;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+`
+
+export const ListItemInfo = styled.span`
+  flex: 1;
+  white-space: nowrap;
+`
+
+export const NameWrapper = styled(ListItemInfo)`
+  flex: 3;
+`
+
+export const IsJediWrapper = styled(ListItemInfo)`
+  display: inline-flex;
+  justify-content: flex-end;
+`
+
+export const HeaderTypography = styled.label`
+  font-weight: 600;
+`
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`
+
+export const FormField = styled.div`
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
 `
