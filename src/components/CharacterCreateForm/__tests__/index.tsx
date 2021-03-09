@@ -6,7 +6,7 @@ import { CharacterCreateForm } from '..'
 describe('CharacterCreateForm', () => {
   it('should not submit for and show error message if name is null', async () => {
     const onSubmitMock = jest.fn()
-    const { getByLabelText, getByTestId, queryByTestId } = render(
+    const { getByTestId, queryByTestId } = render(
       <CharacterCreateForm onSubmit={onSubmitMock} />
     )
     const submitButton = getByTestId('form-submit-button')
